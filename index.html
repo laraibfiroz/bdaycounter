@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Countdown</title>
+  <style>
+    body {
+      background: #ffe6f0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      background: #ffb3d9;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.4);
+      text-align: center;
+    }
+
+    .message {
+      font-size: 2rem;
+      color: #ff3399;
+      text-align: center;
+      max-width: 90%;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown">Loading...</div>
+  <div class="message" id="message" style="display:none;"></div>
+
+  <script>
+    const countdownEl = document.getElementById("countdown");
+    const messageEl = document.getElementById("message");
+
+    const targetDateIST = new Date("2025-06-20T00:00:00+05:30");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDateIST - now;
+
+      if (diff <= 0) {
+        countdownEl.style.display = "none";
+        messageEl.style.display = "block";
+        messageEl.innerHTML = "🎉 Happy Birthday to the Most Amazing Girlfriend!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownEl.innerHTML =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
